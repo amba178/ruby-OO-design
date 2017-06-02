@@ -5,10 +5,31 @@ class Bicycle
 		@size = args[:size]
 		@chain = args[:chain] || default_chain 
 		@tire_size = args[:tire_size] || default_tire_size
+		post_initialize(args)
+	end
+
+	#subclasses may override
+	def post_initialize(args)
+		nil 
 	end
 
 	def default_chain
 		'10-speed'
+	end
+
+	def default_tire_size
+		raise NotImplementedError, "This #{self.class} cannot respond to:"
+	end
+
+	def spares
+		{tire_size: tire_size,
+			chain: chain
+		}.merge(local_spares)
+	end
+
+	#hook for subclasses to override
+	def local_spares
+		{}
 	end
 
 end

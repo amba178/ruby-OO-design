@@ -4,7 +4,7 @@ class MountainBike < Bicycle
 	attr_reader :front_shock, :rear_shock 
 
 
-	def initialize(args)
+	def post_initialize(args)
 		@front_shock = args[:front_shock]
 		@rear_shock = args[:rear_shock]
 		super(args)
