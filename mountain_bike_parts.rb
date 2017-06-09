@@ -1,6 +1,7 @@
 #!/usr/local/bin/ruby -w
 require './bicycle.rb'
-class MountainBike < Bicycle 
+require './parts.rb'
+class MountainBikeParts < Parts
 	attr_reader :front_shock, :rear_shock 
 
 

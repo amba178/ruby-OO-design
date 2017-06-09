@@ -1,5 +1,6 @@
 require './bicycle.rb'
-class RoadBike < Bicycle
+require './parts.rb'
+class RoadBikeParts < Parts
 	attr_reader :tape_color
 
 	def post_initialize(args)
