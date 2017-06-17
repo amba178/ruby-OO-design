@@ -1,6 +1,7 @@
 #!/usr/local/bin/ruby -w
-require './bicycle.rb'
-class MountainBike < Bicycle 
+require './parts.rb'
+
+class MountainBikeParts < Parts
 	attr_reader :front_shock, :rear_shock 
 
 
@@ -23,3 +24,6 @@ end
 mountain_bike = MountainBike.new(size: 'S', front_shock: 'Manitou', rear_shock: "fox")
 
 puts mountain_bike.spares 
+
+
+

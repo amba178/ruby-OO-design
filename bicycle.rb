@@ -1,68 +1,39 @@
-# require './schedule'
 require 'date'
+require './parts_factory.rb'
+require './road_bike_parts'
 require './schedulable'
+
+# Bicycle is now resposible for three things:
+# Knowing its size, holding onto its parts
 
 class Bicycle 
 	include Schedulable
 
-	attr_reader :size, :chain, :tire_size
+	attr_reader :size, :parts
+
 
 	def initialize(args={})
 		@size = args[:size]
-		@chain = args[:chain] || default_chain 
-		@tire_size = args[:tire_size]  || default_tire_size
-		post_initialize(args)
-	end
-
-	#subclasses may override
-	def post_initialize(args)
-		nil 
-	end
-
-	def default_chain
-		'10-speed'
-	end
-
-	def default_tire_size
-		raise NotImplementedError, "This #{self.class} cannot respond to:"
+		@parts = args[:parts]
 	end
 
 	def spares
-		{tire_size: tire_size,
-			chain: chain
-		}.merge(local_spares)
-	end
-
-	#hook for subclasses to override
-	def local_spares
-		{}
-	end
-
-	# # Return true if this bicycle is available 
-	# # during this (now Bicycle) interval.
-	# def schedulable?(start_date, end_date)
-	# 	!scheduled?(start_date - lead_days, end_date)
-	# end
-
-	# def scheduled?(start_date, end_date)
-	# 	schedule.scheduled?(self, start_date, end_date)
-	# end
-
-	# moved to schedulable module
-
-	def lead_days
-		1
+		parts.spares
 	end
 
 end
 
 
+road_config = [['chain', '10-speed'], ['tire_size', '23'], ['tape_color', 'red']]
+
+mountain_config = [['chain', '10-speed'], ['tire_size', '2.1'], 
+                  [' front_shock', 'Manitou', false],['rear_shock', 'Fox']]
+
+road_bike = Bicycle.new( size: 'L', parts: PartsFactory.build(road_config))
+
+puts road_bike.size 
+puts road_bike.spares
 
 
 
-starting = Date.parse("2015/09/04")
-ending = Date.parse("2015/09/10")
-
-b = Bicycle.new
-puts b.schedulable?(starting, ending)
 

@@ -1,5 +1,5 @@
-require './bicycle.rb'
-class RoadBike < Bicycle
+require './parts'
+class RoadBikeParts < Parts
 	attr_reader :tape_color
 
 	def post_initialize(args)
@@ -20,7 +20,4 @@ class RoadBike < Bicycle
 	end
 end
 
-road_bike = RoadBike.new( size: 'M', tape_color: 'red')
 
-puts road_bike.tire_size 
-# puts bike.spares 
