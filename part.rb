@@ -21,9 +21,11 @@ front_shock = Part.new( name: 'front_shock', description: 'Manitou', needs_spare
 road_bike_parts = Parts.new([chain, front_shock,rear_shock, tape, mountain_tire])
 
 road_bike = Bicycle.new(size: 'L', parts: road_bike_parts)
-puts "Size" + "Name".rjust(8) + "Description".rjust(23)
+puts road_bike.spares.size , road_bike.parts.size 
+ 
 
-road_bike.spares.select{|part|  puts "#{road_bike_parts.parts.size}".ljust(10) + "#{part.name}".ljust(20) + "#{part.description}" }
+
+# road_bike.spares.select{|part|  puts "#{road_bike_parts.parts.size}".ljust(10) + "#{part.name}".ljust(20) + "#{part.description}" }
 
 
 

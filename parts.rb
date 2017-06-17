@@ -1,17 +1,17 @@
-class Parts 
+require 'forwardable'
 
-	attr_reader :parts < Array 
+class Parts 
+	
+	extend Forwardable
+	def_delegators :@parts, :size, :each 
+	include Enumerable 
 
 	def initialize(parts)
 		@parts = parts 
 	end
 
-	def size 
-		parts.size
-	end
-
 	def spares
-		select{|part| part.needs_spare}
+		select{|part|  part.needs_spare}
 	end
 
 	# #subclasses may override
@@ -36,3 +36,6 @@ class Parts
 	# end
 
 end
+
+
+
